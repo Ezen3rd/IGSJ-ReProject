@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -119,17 +120,29 @@ public class OrderController {
 		return orderDTO;
 	}
 
-	// 주문상세내역조회페이지 불러오기
+	// 주문상세내역조회페이지(list) 불러오기
 	@ResponseBody
 	@RequestMapping(value="/orderDetailPage", method=RequestMethod.GET)
 	public List<OrderDTO> orderDetailPage(@RequestParam String orderNum) throws Exception{
 
 		logger.info("주문상세내역조회페이지 불러오기 orderDetailPage - Controller");
 		List<OrderDTO> order = new ArrayList<>();
+		
 		order = orderService.orderDetailPage(orderNum);
+		
 		return order;
-
 	}
+	
+	//주문상세내역조회페이지(selelctOne) 불러오기
+	@ResponseBody
+	@RequestMapping(value = "/orderDetailOne", method = RequestMethod.GET)
+	public OrderDTO orderDetailOne(@RequestParam String orderNum) throws Exception {
+		
+		logger.info("주문상세내역조회페이지(selectOne) 불러오기 orderDetailOne - Controller", orderNum);
+			
+		return orderService.orderDetailOne(orderNum);
+	}
+	
 
 	// 결제완료페이지 불러오기
 	@ResponseBody

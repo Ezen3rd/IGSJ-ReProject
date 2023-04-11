@@ -34,6 +34,7 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderDTO> productOrderPage(String userId) throws Exception {
 
 		logger.info("카트에 담긴 상품 정보 불러오기 productOrderPage - OrderService");
+		
 		return orderDAO.productOrderPage(userId);
 	}
 
@@ -63,6 +64,15 @@ public class OrderServiceImpl implements OrderService {
 
 		logger.info("주문상세내역조회페이지 불러오기 orderDetailPage - OrderService");
 		return orderDAO.orderDetailPage(orderNum);
+	}
+	
+	// 주문상세내역조회페이지(selelctOne) 불러오기
+	@Override
+	public OrderDTO orderDetailOne(String orderNum) throws Exception {
+		
+		logger.info("주문상세내역조회페이지(selectOne) 불러오기 orderDetailOne - OrderService");
+		
+		return orderDAO.orderDetailOne(orderNum);
 	}
 
 	// 결제완료페이지 불러오기
